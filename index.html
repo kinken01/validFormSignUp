@@ -8,9 +8,10 @@
     </head>
 
     <body>
+        <a href=""></a>
         <div class="main">
             <form action="" method="POST" class="form" id="register-form">
-                <h3 class="heading">Sign up</h3>
+                <h3 class="heading">Sign up for ...</h3>
                 <p class="desc">Please fill in this form to create an account. ❤️</p>
 
                 <div class="spacer"></div>
@@ -32,6 +33,20 @@
                     <input id="password" name="password" rules="required|min:6" type="password" placeholder="Enter Password" class="form-control">
                     <span class="form-message"></span>
                 </div>
+<!-- 
+                <div class="form-group">
+                    <label for="password_confirmation" class="form-label">Repeat Password</label>
+                    <input id="password_confirmation" name="password_confirmation" rules="required|confirmed" type="password" placeholder="Repeat Password" class="form-control">
+                    <span class="form-message"></span>
+                </div> -->
+
+                <div class="form-group gender">
+                    <label for="password_confirmation" class="form-label">Gender</label>
+                    <input name="gender" type="radio" value="female" class="form-control">Female
+                    <input name="gender" type="radio" value="male" class="form-control">Male
+                    <input name="gender" type="radio" value="custom" class="form-control">Custom
+                    <span class="form-message"></span>
+                </div>
 
                 <button class="form-submit">Sign Up</button>
             </form>
@@ -40,29 +55,15 @@
         <script src="./validator.js"></script>
         <script>
             // Mong muốn
-            Validator('#register-form')
+            var registerForm = new Validator({
+                form: '#register-form',
+                formGroupSelector: '.form-group',
+                errorSelector: '.form-message',
+            })
+
+            registerForm.onSubmit = function (formData) {
+                console.log('formData:',formData)
+            }
         </script>
     </body>
 </html>
-
-/*
-{
-    form: '#form-1',
-    formGroupSelector: '.form-group',
-    errorSelector: '.form-message',
-    rules: [
-        Validator.isRequired('#fullname'),
-        Validator.isRequired('#email'),
-        Validator.isEmail('#email'),
-        Validator.minLength('#password', 8),
-        Validator.isRequired('#password_confirmation'),
-        Validator.isConfirmed('#password_confirmation', function () {
-            return document.querySelector('#form-1 #password').value
-        }, 'Repeat Password is incorrect'),
-    ],
-    onSubmit: function (data) {
-        // Call API
-        console.log(data)
-    }
-}
-*/
